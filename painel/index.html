@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111111">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Painel · Opa</title>
+  <link rel="stylesheet" href="/painel.css">
+  <script src="/config.js"></script>
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="topo">
+      <div class="marca">
+        <div class="logo" id="logo" aria-hidden="true">S</div>
+        <div>
+          <h1 id="titulo">Painel</h1>
+          <p class="sub" id="subtitulo">Opa</p>
+        </div>
+      </div>
+      <button class="sair" id="sair" type="button" hidden>Sair</button>
+    </header>
+
+    <div class="barra" id="barra" hidden>
+      <div class="periodos" role="group" aria-label="Período">
+        <button type="button" data-periodo="hoje">Hoje</button>
+        <button type="button" data-periodo="semana">Semana</button>
+        <button type="button" data-periodo="mes">Mês</button>
+        <button type="button" data-periodo="ano">Ano</button>
+      </div>
+      <label class="quem"><span class="vh">Profissional</span>
+        <select id="profissional"><option value="">Barbearia toda</option></select>
+      </label>
+    </div>
+
+    <nav class="abas" id="abas" role="tablist" hidden>
+      <button type="button" role="tab" data-aba="resumo">Resumo</button>
+      <button type="button" role="tab" data-aba="cotas">Cotas <span class="selo" id="selo-cotas" hidden></span></button>
+      <button type="button" role="tab" data-aba="agenda">Agenda</button>
+      <button type="button" role="tab" data-aba="ajustes">Ajustes</button>
+    </nav>
+
+    <main id="tela" tabindex="-1">
+      <div class="carregando"><span class="giro" aria-hidden="true"></span> Abrindo o painel…</div>
+    </main>
+
+    <footer class="rodape">Painel por <strong>Opa</strong></footer>
+  </div>
+  <div class="dica" id="dica" role="status" hidden></div>
+  <div class="aviso" id="aviso" role="alert" hidden></div>
+  <script src="/painel.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111111">
+  <meta name="robots" content="noindex">
+  <title>Agendar horário</title>
+  <link rel="stylesheet" href="/estilo.css">
+  <script src="/config.js"></script>
+  <script src="/sugestao-email.js"></script>
+</head>
+<body>
+  <div class="app" id="app" aria-busy="true">
+    <header class="topo" id="topo" hidden>
+      <div class="marca">
+        <div class="logo" id="logo" aria-hidden="true"></div>
+        <div>
+          <h1 id="barbearia-nome"></h1>
+          <p class="local" id="barbearia-local"></p>
+        </div>
+      </div>
+      <div class="barbeiro">
+        <div class="foto" id="foto" aria-hidden="true"></div>
+        <p>Agendar com <strong id="profissional-nome"></strong></p>
+      </div>
+    </header>
+
+    <main id="tela" tabindex="-1">
+      <div class="carregando" id="carregando"><span class="giro" aria-hidden="true"></span> Abrindo a agenda…</div>
+    </main>
+
+    <footer class="rodape">
+      <p>Agendamento por <strong>Opa</strong> · <a href="/termos.html">Termos de uso</a> · <a href="/privacidade.html">Privacidade</a></p>
+    </footer>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>

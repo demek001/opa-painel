@@ -1,0 +1,6 @@
+{
+  "nome": "Barbearia Exemplo",
+  "whatsapp": null,
+  "cores": { "fundo": "#111111", "texto": "#FFFFFF", "creme": "#F3EBDD", "destaque": "#E8604C" },
+  "profissionais": { "carlos": "Carlos", "bruno": "Bruno", "diego": "Diego" }
+}
