@@ -151,9 +151,8 @@
   function desenhar() {
     const d = S.dados;
     $("#titulo").textContent = d.barbearia.nome;
-    $("#logo").textContent = (d.barbearia.nome || "S").trim()[0].toUpperCase();
     $("#subtitulo").textContent = `Painel · ${d.dono.nome}`;
-    document.title = `Painel · ${d.barbearia.nome}`;
+    document.title = `${d.barbearia.nome} · Opa`;
     const sel = $("#profissional");
     if (sel.options.length === 1) for (const p of d.profissionais.filter((x) => x.ativo)) sel.append(h("option", { value: p.id }, p.nome));
     sel.value = S.prof;

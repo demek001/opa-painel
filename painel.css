@@ -199,3 +199,6 @@ pre.extrato { white-space: pre-wrap; overflow-wrap: anywhere; font: 13px/1.5 ui-
 .dados-wa dd { margin: 0; overflow-wrap: anywhere; }
 .sub-secao { font-size: 15px; margin: 14px 0 6px; }
 .lista-modelos { list-style: none; padding: 0; margin: 0 0 12px; display: grid; gap: 6px; }
+
+/* Marca do Opa no cabeçalho (D66): a palavra "Opa" em coral, como no site useusa.com.br/opa. */
+.marca-opa { font: 800 26px/1 "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #ff7a62; letter-spacing: -0.03em; flex: none; padding-right: 4px; }
