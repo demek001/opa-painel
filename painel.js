@@ -772,11 +772,21 @@
           h("ul", { class: "lista-modelos" }, modelos.map((m) => h("li", null, h("span", { class: "num" }, m.nome), " ", chip(SITUACAO_MODELO[m.situacao] || ["sem_dados", "?", m.situacao]),
             m.motivo ? h("span", { class: "item-det" }, ` ${m.motivo}`) : null))));
       }
+      if (S.chamadas && S.chamadas.length) {
+        linhas.push(h("h3", { class: "sub-secao" }, "Chamada à API da Meta"),
+          S.chamadas.map((c) => h("pre", { class: "chamada-api" },
+            `${c.metodo} https://graph.facebook.com/${CFG.metaVersao || "v23.0"}${c.caminho}
+${JSON.stringify(c.corpo, null, 2)}
+
+← ${JSON.stringify(c.resposta, null, 2)}`)));
+      }
       linhas.push(h("div", { class: "acoes" },
+        h("button", { class: "bt principal", type: "button", onclick: () => acaoWhatsApp({ acao: "whatsapp_criar_modelo" }, "Pedido de criação do modelo enviado à Meta.") }, "Criar modelo de mensagem"),
         modelos.length ? h("button", { class: "bt", type: "button", onclick: () => acaoWhatsApp({ acao: "whatsapp_modelos" }, "Situação dos modelos atualizada.") }, "Atualizar situação") : null,
         h("button", { class: "bt perigo", type: "button", onclick: () => { if (confirm("Desconectar o WhatsApp da barbearia? O Opa para de mandar mensagens por ele.")) acaoWhatsApp({ acao: "whatsapp_desconectar" }, "WhatsApp desconectado."); } }, "Desconectar")));
     } else {
       if (w.situacao === "erro" && w.ultimo_erro) linhas.push(h("p", { class: "nota" }, "A última tentativa não terminou. Tente de novo."));
+      if (w.demo) linhas.push(formToken());
       linhas.push(h("p", { class: "nota" }, "Conecte o WhatsApp da barbearia para o Opa mandar a confirmação do horário ao cliente e os avisos à equipe pelo número da própria barbearia."),
         h("div", { class: "acoes" },
           h("button", { class: "bt principal", type: "button", onclick: () => conectarWhatsApp("coexistence") }, w.situacao === "erro" ? "Tentar de novo" : "Conectar o WhatsApp Business que já uso"),
@@ -785,9 +795,27 @@
     return h("section", { class: "cartao", id: "cartao-whatsapp" }, h("div", { class: "cabeca-fechamento" }, h("h2", null, "WhatsApp da barbearia"), chip(SITUACAO_WA[w.situacao] || SITUACAO_WA.nao_conectada)), linhas);
   }
 
+  // Conta de demonstração (D66, App Review): conecta a WABA de teste com o token de um usuário do sistema.
+  function formToken() {
+    const waba = h("input", { type: "text", inputmode: "numeric", maxlength: 25, required: true, autocomplete: "off" });
+    const pnid = h("input", { type: "text", inputmode: "numeric", maxlength: 25, required: true, autocomplete: "off" });
+    const token = h("input", { type: "password", maxlength: 1000, required: true, autocomplete: "off" });
+    const form = h("form", { class: "secao", onsubmit: async (ev) => {
+      ev.preventDefault();
+      await acaoWhatsApp({ acao: "whatsapp_conectar_token", waba_id: waba.value, phone_number_id: pnid.value, token: token.value }, "WhatsApp conectado.");
+      token.value = "";
+    } },
+      h("h3", { class: "sub-secao" }, "Conectar por token (conta de demonstração)"),
+      h("div", { class: "linha-campos" }, h("label", { class: "campo" }, "Id da conta (WABA)", waba), h("label", { class: "campo" }, "Id do número", pnid)),
+      h("label", { class: "campo" }, "Token do usuário do sistema", token),
+      h("button", { class: "bt principal", type: "submit" }, "Conectar"));
+    return form;
+  }
+
   async function acaoWhatsApp(corpo, ok) {
     try {
-      await api({ corpo });
+      const r = await api({ corpo });
+      S.chamadas = r.chamadas || null;
       aviso(ok);
       await carregar();
     } catch (e) { if (e.message !== "sessao") aviso(e.message); }

@@ -202,3 +202,4 @@ pre.extrato { white-space: pre-wrap; overflow-wrap: anywhere; font: 13px/1.5 ui-
 
 /* Marca do Opa no cabeçalho (D66): a palavra "Opa" em coral, como no site useusa.com.br/opa. */
 .marca-opa { font: 800 26px/1 "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #ff7a62; letter-spacing: -0.03em; flex: none; padding-right: 4px; }
+.chamada-api { background: rgba(255, 255, 255, 0.06); border-radius: 8px; padding: 10px 12px; font: 12px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; margin: 0 0 12px; max-height: 340px; overflow: auto; }
